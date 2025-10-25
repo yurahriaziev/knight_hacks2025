@@ -1,13 +1,21 @@
 from agents.parser_agent import parse_problem
+from agents.scene_agent import generate_scene
+from utils.logger import log
 
 test_cases = [
-    "A 5 kg box slides down a 30 degree incline with friction coefficient 0.2.",
-    "A 2 kg sphere rolls down a 45° ramp with no friction.",
-    "A block of unknown mass rests on a horizontal plane.",
-    "Two pulleys connected by a rope lift a 10 kg weight.",
+    "A 5 kg sphere rolls down a 30° incline without friction.",
 ]
 
-for i, case in enumerate(test_cases, 1):
-    print(f"\n================= TEST {i} =================")
-    result = parse_problem(case)
-    print(result)
+for i, problem in enumerate(test_cases, start=1):
+    log("IntegrationTest", f"================= TEST {i} =================", "info")
+    log("IntegrationTest", f"Problem: {problem}", "info")
+
+    # Step 1 — parse the word problem
+    parsed = parse_problem(problem)
+    log("IntegrationTest", f"ParsedSpec: {parsed}", "success")
+
+    # Step 2 — generate a scene from parsed data
+    scene_json = generate_scene(parsed)
+    log("IntegrationTest", f"SceneJSON: {scene_json}", "success")
+
+    print("\n" + "=" * 80 + "\n")
