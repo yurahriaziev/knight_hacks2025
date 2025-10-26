@@ -1,14 +1,67 @@
 import Header from "../components/Header";
 import { SlidersHorizontal, RefreshCw, Play, Send } from "lucide-react";
 import { useState } from "react";
+import { API_URL } from "../config";
+import Loader from "../components/Loader";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 export default function SimulationPage() {
-  const [problem, setProblem] = useState(
-    "A 5kg box slides down a 40° incline with friction coefficient 0.3."
-  );
+  const [problem, setProblem] = useState()
+  const [sceneData, setSceneData] = useState({})
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
-  const handleUpdate = () => {
-    console.log("Problem updated:", problem)
+  const handleGenerate = async() => {
+    setLoading(true)
+    setError('')
+
+    try {
+      const response = await fetch(`${API_URL}/simulate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ problem })
+      })
+
+      if (!response.ok) {
+        setError('Server error')
+      }
+
+      const data = await response.json()
+      setSceneData(data.validated || data.scene)
+    } catch (error) {
+      console.log(error)
+      setError('Failed to generate simulation')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleUpdate = async() => {
+    setLoading(true)
+    setError("")
+
+    try {
+      const response = await fetch(`${API_URL}/simulate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ problem }),
+      })
+
+      if (!response.ok) throw new Error("Server error")
+
+      const data = await response.json()
+      setSceneData(data.validated || data.scene)
+      console.log("Simulation JSON received:", data)
+    } catch (err) {
+      console.error(err)
+      setError("Failed to generate simulation")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -123,17 +176,24 @@ export default function SimulationPage() {
           <div className="absolute w-64 h-64 bg-gradient-to-r from-[#2F88FC] to-[#31E3CB] blur-[120px] opacity-20" />
 
           {/* Simulation placeholder */}
-          <div className="relative z-10 text-center">
-            <h2 className="text-4xl font-bold text-white mb-3">
-              3D Simulation View
-            </h2>
-            <p className="text-gray-300 text-lg max-w-sm mx-auto">
-              Once the problem is processed, your interactive visualization will
-              appear here.
-            </p>
+          <div className="relative z-10 text-center w-full h-full flex items-center justify-center">
+            {loading ? (
+              <div className="flex items-center justify-center w-[400px] h-[400px] mx-auto">
+                <Loader />
+              </div>
+            ) : (
+              <div>
+                <h2 className="text-4xl font-bold text-white mb-3">
+                  3D Simulation View
+                </h2>
+                <p className="text-gray-300 text-lg max-w-sm mx-auto">
+                  Once the problem is processed, your interactive visualization will appear here.
+                </p>
+              </div>
+            )}
           </div>
         </section>
       </main>
     </div>
-  );
+  )
 }
