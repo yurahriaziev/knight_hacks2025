@@ -56,15 +56,33 @@ import { Suspense, useRef, useEffect, useState } from "react"
 //   )
 // }
 export default function SceneRenderer({ data, replaySignal }) {
+    if (!data || !data.scene) {
+        return (
+        <div className="text-white text-lg text-center">
+            <div className="text-center text-gray-300">
+                <h2 className="text-4xl font-bold text-white mb-3">
+                    3D Simulation View
+                </h2>
+                <p className="text-gray-400 text-lg max-w-sm mx-auto">
+                    Enter a problem and click <span className="text-[#31E3CB] font-semibold">Update Problem</span> to generate a simulation.
+                </p>
+            </div>
+        </div>
+        )
+    }
   const [resetFlag, setResetFlag] = useState(false)
-
+   console.log(data)
+   const cameraPos = data.scene.camera?.position || { x: 80, y: 40, z: 80 }
+  const lighting = data.scene.lighting || []
+  const objects = data.scene.objects || []
+  const environment = data.scene.environment || null
   useEffect(() => {
     if (replaySignal) setResetFlag(true)
   }, [replaySignal])
 
   return (
     <Canvas
-      camera={{ position: [40, 25, 60], fov: 45 }}
+      camera={{ position: [75, 40, -80], fov: 45 }}
       style={{ width: "100%", height: "100%" }}
     >
       <Suspense fallback={null}>
@@ -76,13 +94,13 @@ export default function SceneRenderer({ data, replaySignal }) {
           maxDistance={150}
           target={[0, 0, 0]}
         />
-        <SceneLights lighting={data.scene.lighting} />
+        <SceneLights lighting={lighting} />
         <Physics gravity={[0, -9.81, 0]}>
           <RigidBody type="fixed"><StrongBase /></RigidBody>
           <EnvironmentRigid environment={data.scene.environment} />
           <SceneObjectsRigid
-            objects={data.scene.objects}
-            environment={data.scene.environment}
+            objects={objects}
+            environment={environment}
             resetFlag={resetFlag}
             onResetDone={() => setResetFlag(false)}
           />

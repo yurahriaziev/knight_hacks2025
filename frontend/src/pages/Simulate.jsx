@@ -66,6 +66,324 @@ export default function SimulationPage() {
     }
   }
 
+  const sampleSphere = {
+    "status": "success",
+    "message": "Simulation generated successfully",
+    "problem": "A 5kg sphere rolls down a 30 degree incline without friction.",
+    "parsed": {
+      "environment_type": "incline",
+      "angle_deg": 30,
+      "friction": 0,
+      "objects": [
+        {
+          "type": "sphere",
+          "mass_kg": 5
+        }
+      ],
+      "extra_terms": {},
+      "source_text": "A 5kg sphere rolls down a 30 degree incline without friction."
+    },
+    "scene": {
+      "scene": {
+        "gravity": {
+          "x": 0,
+          "y": -9.81,
+          "z": 0
+        },
+        "camera": {
+          "position": {
+            "x": 5,
+            "y": 5,
+            "z": 10
+          },
+          "lookAt": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        "lighting": [
+          {
+            "type": "ambient",
+            "intensity": 0.5
+          },
+          {
+            "type": "directional",
+            "direction": {
+              "x": 0.5,
+              "y": -1,
+              "z": 0.5
+            },
+            "intensity": 0.8
+          }
+        ]
+      },
+      "environment": {
+        "type": "incline",
+        "angle": 30,
+        "material": {
+          "friction": 0,
+          "restitution": 0.2
+        }
+      },
+      "objects": [
+        {
+          "type": "sphere",
+          "mass": 5,
+          "size": {
+            "width": 1,
+            "height": 1,
+            "depth": 1
+          },
+          "position": {
+            "x": -2,
+            "y": 0.5,
+            "z": 0
+          },
+          "material": {
+            "color": "#E2562C",
+            "friction": 0,
+            "restitution": 0.3
+          }
+        }
+      ],
+      "simulation": {
+        "timestep": 0.016,
+        "duration": 5,
+        "solver": "Cannon"
+      }
+    },
+    "validated": {
+      "scene": {
+        "gravity": {
+          "x": 0,
+          "y": -9.81,
+          "z": 0
+        },
+        "camera": {
+          "position": {
+            "x": 5,
+            "y": 5,
+            "z": 10
+          },
+          "lookAt": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        "lighting": [
+          {
+            "type": "ambient",
+            "intensity": 0.5
+          },
+          {
+            "type": "directional",
+            "direction": {
+              "x": 0.5,
+              "y": -1,
+              "z": 0.5
+            },
+            "intensity": 0.8
+          }
+        ]
+      },
+      "environment": {
+        "type": "incline",
+        "angle": 30,
+        "material": {
+          "friction": 0,
+          "restitution": 0.2
+        }
+      },
+      "objects": [
+        {
+          "type": "sphere",
+          "mass": 5,
+          "size": {
+            "width": 1,
+            "height": 1,
+            "depth": 1
+          },
+          "position": {
+            "x": -2,
+            "y": 0.5,
+            "z": 0
+          },
+          "material": {
+            "color": "#E2562C",
+            "friction": 0,
+            "restitution": 0.3
+          }
+        }
+      ],
+      "simulation": {
+        "timestep": 0.016,
+        "duration": 5,
+        "solver": "Cannon"
+      }
+    }
+  }
+
+  const sampleCube = {
+    "status": "success",
+    "message": "Simulation generated successfully",
+    "problem": "A 2 kg cube slides down a 25° incline with a friction coefficient of 0.3.",
+    "parsed": {
+      "environment_type": "incline",
+      "angle_deg": 25,
+      "friction": 0.3,
+      "objects": [
+        {
+          "type": "cube",
+          "mass_kg": 2
+        }
+      ],
+      "extra_terms": {},
+      "source_text": "A 2 kg cube slides down a 25° incline with a friction coefficient of 0.3."
+    },
+    "scene": {
+      "scene": {
+        "gravity": {
+          "x": 0,
+          "y": -9.81,
+          "z": 0
+        },
+        "camera": {
+          "position": {
+            "x": 5,
+            "y": 5,
+            "z": 10
+          },
+          "lookAt": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        "lighting": [
+          {
+            "type": "ambient",
+            "intensity": 0.5
+          },
+          {
+            "type": "directional",
+            "direction": {
+              "x": 0.5,
+              "y": -1,
+              "z": 0.5
+            },
+            "intensity": 0.8
+          }
+        ]
+      },
+      "environment": {
+        "type": "incline",
+        "angle": 25,
+        "material": {
+          "friction": 0.3,
+          "restitution": 0.2
+        }
+      },
+      "objects": [
+        {
+          "type": "cube",
+          "mass": 2,
+          "size": {
+            "width": 1,
+            "height": 1,
+            "depth": 1
+          },
+          "position": {
+            "x": -2,
+            "y": 2,
+            "z": 0
+          },
+          "material": {
+            "color": "#E2562C",
+            "friction": 0.3,
+            "restitution": 0.3
+          }
+        }
+      ],
+      "simulation": {
+        "timestep": 0.016,
+        "duration": 5,
+        "solver": "Cannon"
+      }
+    },
+    "validated": {
+      "scene": {
+        "gravity": {
+          "x": 0,
+          "y": -9.81,
+          "z": 0
+        },
+        "camera": {
+          "position": {
+            "x": 5,
+            "y": 5,
+            "z": 10
+          },
+          "lookAt": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        "lighting": [
+          {
+            "type": "ambient",
+            "intensity": 0.5
+          },
+          {
+            "type": "directional",
+            "direction": {
+              "x": 0.5,
+              "y": -1,
+              "z": 0.5
+            },
+            "intensity": 0.8
+          }
+        ]
+      },
+      "environment": {
+        "type": "incline",
+        "angle": 25,
+        "material": {
+          "friction": 0.3,
+          "restitution": 0.2
+        }
+      },
+      "objects": [
+        {
+          "type": "cube",
+          "mass": 2,
+          "size": {
+            "width": 1,
+            "height": 1,
+            "depth": 1
+          },
+          "position": {
+            "x": -2,
+            "y": 2,
+            "z": 0
+          },
+          "material": {
+            "color": "#E2562C",
+            "friction": 0.3,
+            "restitution": 0.3
+          }
+        }
+      ],
+      "simulation": {
+        "timestep": 0.016,
+        "duration": 5,
+        "solver": "Cannon"
+      }
+    }
+  }
+
   return (
     <div className="h-screen flex flex-col bg-[#F8FAFC] text-[#0F172A] font-[Poppins] overflow-hidden">
       {/* Header */}
@@ -113,7 +431,7 @@ export default function SimulationPage() {
           <div className="relative z-10 flex flex-col justify-center flex-[0.75] border border-[#E2E8F0] bg-white/80 backdrop-blur-md rounded-md p-8 shadow-sm">
             {/* Sliders */}
             <div className="space-y-8 mb-10">
-              <div>
+              {/* <div>
                 <label className="block text-base font-medium mb-1">
                   Mass (kg)
                 </label>
@@ -151,6 +469,11 @@ export default function SimulationPage() {
                   defaultValue="0.3"
                   className="w-full accent-[#31E3CB] h-2 bg-gray-200 rounded-full appearance-none cursor-pointer"
                 />
+              </div> */}
+              <div className="flex items-center justify-center h-40">
+                <p className="italic text-gray-500 text-lg">
+                  Feature coming soon...
+                </p>
               </div>
             </div>
 
@@ -164,10 +487,10 @@ export default function SimulationPage() {
                 Replay Simulation
               </button>
 
-              <button className="cursor-pointer flex-1 border-2 border-[#2F88FC] text-[#2F88FC] hover:bg-[#2F88FC]/10 font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+              {/* <button className="cursor-pointer flex-1 border-2 border-[#2F88FC] text-[#2F88FC] hover:bg-[#2F88FC]/10 font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
                 <RefreshCw className="w-5 h-5" />
                 Reset
-              </button>
+              </button> */}
             </div>
           </div>
         </section>
@@ -187,7 +510,7 @@ export default function SimulationPage() {
                 <Loader />
               </div>
             ) : sceneData ? (
-              <SceneRenderer data={sceneData} replaySignal={replayKey} />
+              <SceneRenderer data={sampleCube} replaySignal={replayKey} />
             ) : (
               <div>
                 <h2 className="text-4xl font-bold text-white mb-3">
