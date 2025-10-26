@@ -4,13 +4,15 @@ import { useState } from "react";
 import { API_URL } from "../config";
 import Loader from "../components/Loader";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import SceneRenderer from "../components/SceneRenderer";
 
 export default function SimulationPage() {
   const [problem, setProblem] = useState()
   const [sceneData, setSceneData] = useState({})
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-
+  const [replayKey, setReplayKey] = useState(0)
+  
   const handleGenerate = async() => {
     setLoading(true)
     setError('')
@@ -154,7 +156,10 @@ export default function SimulationPage() {
 
             {/* Action Buttons */}
             <div className="flex gap-4">
-              <button className="cursor-pointer flex-1 bg-gradient-to-r from-[#2F88FC] to-[#31E3CB] hover:from-[#31E3CB] hover:to-[#2F88FC] text-white font-semibold py-3 rounded-xl text-base shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.03] flex items-center justify-center gap-2">
+              <button
+                onClick={() => setReplayKey(prev => prev + 1)}
+                className="cursor-pointer flex-1 bg-gradient-to-r from-[#2F88FC] to-[#31E3CB] text-white font-semibold py-3 rounded-xl shadow-lg hover:scale-[1.03] flex items-center justify-center gap-2"
+              >
                 <Play className="w-5 h-5" />
                 Replay Simulation
               </button>
@@ -181,13 +186,16 @@ export default function SimulationPage() {
               <div className="flex items-center justify-center w-[400px] h-[400px] mx-auto">
                 <Loader />
               </div>
+            ) : sceneData ? (
+              <SceneRenderer data={sceneData} replaySignal={replayKey} />
             ) : (
               <div>
                 <h2 className="text-4xl font-bold text-white mb-3">
                   3D Simulation View
                 </h2>
                 <p className="text-gray-300 text-lg max-w-sm mx-auto">
-                  Once the problem is processed, your interactive visualization will appear here.
+                  Once the problem is processed, your interactive visualization will
+                  appear here.
                 </p>
               </div>
             )}
