@@ -1,2 +1,5 @@
-__pycache__
+.venv
+**/__pycache__/
+_log/
 .env
+.claude
