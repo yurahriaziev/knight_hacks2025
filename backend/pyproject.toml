@@ -3,7 +3,9 @@ name = "backend"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.13"
 dependencies = [
-    "fastapi>=0.120.1",
+    "dotenv>=0.9.9",
+    "fastapi[standard-no-fastapi-cloud-cli]>=0.120.1",
+    "google-generativeai>=0.8.5",
 ]

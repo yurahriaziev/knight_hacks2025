@@ -1,20 +1,20 @@
-import os
 import json
+import os
+from typing import Any, Dict
+
 import google.generativeai as genai
 from dotenv import load_dotenv
-from typing import Dict, Any
-
 from utils.logger import log
 from utils.validators import validate_parsed_spec
-from utils.schema import ParsedSpecSchema
 
 load_dotenv()
-GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 if not GOOGLE_API_KEY:
     raise EnvironmentError("Missing GOOGLE_API_KEY in .env file")
 
 genai.configure(api_key=GOOGLE_API_KEY)
+
 
 def parse_problem(text: str) -> Dict[str, Any]:
     """
@@ -94,7 +94,7 @@ def parse_problem(text: str) -> Dict[str, Any]:
         """
 
         log("ParserAgent", "Sending prompt to Gemini model...", "info")
-        model = genai.GenerativeModel('gemini-2.5-flash')
+        model = genai.GenerativeModel("gemini-2.5-flash")
         response = model.generate_content(prompt)
 
         raw_output = response.text.strip()
@@ -109,7 +109,7 @@ def parse_problem(text: str) -> Dict[str, Any]:
                 "raw_output": raw_output,
                 "source_text": text,
             }
-        
+
         is_valid, errors = validate_parsed_spec(parsed)
         if not is_valid:
             log("ParserAgent", f"Validation failed: {errors}", "error")
@@ -121,7 +121,7 @@ def parse_problem(text: str) -> Dict[str, Any]:
                 "extra_terms": parsed.get("extra_terms", {}),
                 "source_text": text,
             }
-        
+
         required_fields = [
             "environment_type",
             "angle_deg",
@@ -139,5 +139,6 @@ def parse_problem(text: str) -> Dict[str, Any]:
     except Exception as e:
         log("ParserAgent", f"Error parsing problem: {e}", "error")
         return {"error": str(e), "source_text": text}
-    
-__all__ = ['parse_problem']
+
+
+__all__ = ["parse_problem"]
